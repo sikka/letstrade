@@ -1,0 +1,101 @@
+CREATE TABLE `images` (
+
+  `imageid` int(11) NOT NULL DEFAULT '0',
+
+  `uri` varchar(500) DEFAULT NULL,
+
+  PRIMARY KEY (`imageid`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ 
+
+CREATE TABLE `item` (
+
+  `itemID` int(20) NOT NULL,
+
+  `title` varchar(20) NOT NULL DEFAULT '',
+
+  `product_or_skill` tinyint(1) NOT NULL,
+
+  `description` varchar(120) DEFAULT NULL,
+
+  `points_asked` int(11) DEFAULT NULL,
+
+  `uid` int(11) NOT NULL,
+
+  `picID` int(11) DEFAULT '1',
+
+  `need_have_traded` tinyint(1) DEFAULT NULL,
+
+  PRIMARY KEY (`itemID`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ 
+
+CREATE TABLE `ItemsInOffer` (
+
+  `oid` int(11) NOT NULL DEFAULT '0',
+
+  `senderID` int(20) DEFAULT NULL,
+
+  `receiverID` int(20) DEFAULT NULL,
+
+  `item_type` char(1) DEFAULT NULL,
+
+  `itemid` int(11) NOT NULL DEFAULT '0',
+
+  `points` int(11) DEFAULT NULL,
+
+  PRIMARY KEY (`oid`,`itemid`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ 
+
+CREATE TABLE `offer` (
+
+  `oid` int(11) NOT NULL,
+
+  `senderID` varchar(20) NOT NULL DEFAULT '',
+
+  `receiverID` varchar(20) NOT NULL DEFAULT '',
+
+  `offer_status` tinyint(1) NOT NULL,
+
+  PRIMARY KEY (`oid`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ 
+
+CREATE TABLE `rating` (
+
+  `ratedUser` int(20) NOT NULL,
+
+  `ratingUser` int(20) NOT NULL,
+
+  `rating` int(11) NOT NULL,
+
+  `review` varchar(200) DEFAULT NULL,
+
+  PRIMARY KEY (`ratedUser`,`ratingUser`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ 
+
+CREATE TABLE `user` (
+
+  `uid` int(20) NOT NULL,
+
+  `uname` varchar(20) NOT NULL DEFAULT '',
+
+  `email` varchar(30) NOT NULL DEFAULT '',
+
+  `points` int(11) unsigned zerofill NOT NULL,
+
+  `profile_img_id` int(11) DEFAULT '0'
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
