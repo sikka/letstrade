@@ -46,5 +46,8 @@ public class Offer {
 		this.status = status;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		return this.offerId == ((Offer)obj).offerId;
+	}
 }

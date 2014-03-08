@@ -5,6 +5,7 @@ public class Item {
 	private String title;
 	private int userId;
 	private int itemId;
+	private int points;
 	private Enumerations.ItemType type;
 	
 	private List<Offer> offersIncludedIn;
@@ -46,6 +47,18 @@ public class Item {
 	}
 	public void setStatus(Enumerations.ItemStatus status) {
 		this.status = status;
+	}
+	
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		return this.itemId == ((Item)obj).getItemId();
+		
 	}
 	
 }
