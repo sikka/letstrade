@@ -1,3 +1,4 @@
+package lt.beans;
 
 public class Enumerations {
 	public static enum ItemType{SKILL, PRODUCT, SERVICES};

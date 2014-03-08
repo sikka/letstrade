@@ -1,3 +1,4 @@
+package lt.beans;
 import java.util.List;
 
 
