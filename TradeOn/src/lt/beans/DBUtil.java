@@ -88,7 +88,6 @@ public class DBUtil {
 	 * @throws SQLException
 	 */
 	public static void addItemsToUserList(int userid, List<Item> items) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection connect = null;
 		Statement statement = null;
 		PreparedStatement preparedStatement = null;
@@ -143,51 +142,49 @@ public class DBUtil {
 	}
 
 	public static void removeItemsFromUserList(int uid, List<Item> items) throws SQLException {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-				Connection connect = null;
-				Statement statement = null;
-				PreparedStatement preparedStatement = null;
-				ResultSet resultSet = null;
-				try{			
-					 // This will load the MySQL driver, each DB has its own driver
-				      Class.forName("com.mysql.jdbc.Driver");
-				      // Setup the connection with the DB
-				      connect = DriverManager
-				          .getConnection("jdbc:mysql://107.170.251.126:3306?"
-				              + "user=ltm&password=password");
-				      
-				      preparedStatement = connect
-				          .prepareStatement("delete from tradeon.item where itemid = ?");
-				     
-				      for(Item item: items){
-				    	  preparedStatement.setInt(1, item.getItemId());
-					      preparedStatement.executeUpdate();
-				      }
+		Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try{			
+			 // This will load the MySQL driver, each DB has its own driver
+		      Class.forName("com.mysql.jdbc.Driver");
+		      // Setup the connection with the DB
+		      connect = DriverManager
+		          .getConnection("jdbc:mysql://107.170.251.126:3306?"
+		              + "user=ltm&password=password");
+		      
+		      preparedStatement = connect
+		          .prepareStatement("delete from tradeon.item where itemid = ?");
+		     
+		      for(Item item: items){
+		    	  preparedStatement.setInt(1, item.getItemId());
+			      preparedStatement.executeUpdate();
+		      }
 
-				}
-				catch(SQLException e){
-					throw e;
-				}
-				catch(Exception e){
-					e.printStackTrace();
-				}
-				finally {
-					try {
-					      if (resultSet != null) {
-					        resultSet.close();
-					      }
-
-					      if (statement != null) {
-					        statement.close();
-					      }
-
-					      if (connect != null) {
-					        connect.close();
-					      }
-					    } catch (Exception e) {
-
-					    }
+		}
+		catch(SQLException e){
+			throw e;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			try {
+			      if (resultSet != null) {
+			        resultSet.close();
+			      }
+	
+			      if (statement != null) {
+			        statement.close();
+			      }
+	
+			      if (connect != null) {
+			        connect.close();
+			      }
+			    } catch (Exception e) {
+				e.printStackTrace();
 			    }
+	    }
 	}
 }
