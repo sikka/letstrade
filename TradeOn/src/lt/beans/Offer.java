@@ -1,3 +1,6 @@
+package lt.beans;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public class Offer {
@@ -8,6 +11,14 @@ public class Offer {
 	private List<Item> itemsToBeSent;
 	private List<Item> itemsToBeReceived;
 	
+	private Enumerations.OfferItemType offerItemtype;
+	
+	public Enumerations.OfferItemType getOfferItemtype() {
+		return offerItemtype;
+	}
+	public void setOfferItemtype(Enumerations.OfferItemType offerItemtype) {
+		this.offerItemtype = offerItemtype;
+	}
 	public List<Item> getItemsToBeSent() {
 		return itemsToBeSent;
 	}
@@ -45,5 +56,29 @@ public class Offer {
 		this.status = status;
 	}
 	
+	
+	
+	// ==========================================================================
+	// FUNCTIONS TO DO MODIFICATIONS ON THE OFFER OBJECT AND IN TURN TO DATABASE
+	// ==========================================================================
+	
+	public void saveOfferStateToDb(Offer offer) throws SQLException{
+		DBUtil.saveOfferStateToDb(offer);
+	}
+	
+	public void makeOffer(Offer offer) throws SQLException{
+		// Inserts a new record in the database and sets the offerId of the object.
+		DBUtil.makeOffer(offer);
+	}
+	
+	public void acceptOffer(Offer offer) throws SQLException{
+		DBUtil.acceptOffer(offer);
+		offer.setStatus(Enumerations.OfferStatus.ACCEPTED);
+	}
+	
+	public void rejectOffer(Offer offer) throws SQLException{
+		DBUtil.rejectOffer(offer);
+		offer.setStatus(Enumerations.OfferStatus.CANCELLED);
+	}
 	
 }

@@ -1,3 +1,5 @@
+package lt.beans;
+
 
 public class Rating {
 	private int ratingUserId;
