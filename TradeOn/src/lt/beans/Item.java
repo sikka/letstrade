@@ -1,12 +1,34 @@
 package lt.beans;
+
 import java.util.List;
 
 public class Item {
 	private String title;
 	private int userId;
 	private int itemId;
-	private int points;
 	private Enumerations.ItemType type;
+	private String description;
+	private int points;
+	private int picId;
+	
+	public int getPicId() {
+		return picId;
+	}
+	public void setPicId(int picId) {
+		this.picId = picId;
+	}
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 	private List<Offer> offersIncludedIn;
 	private Enumerations.ItemStatus status;
@@ -47,18 +69,6 @@ public class Item {
 	}
 	public void setStatus(Enumerations.ItemStatus status) {
 		this.status = status;
-	}
-	
-	public int getPoints() {
-		return points;
-	}
-	public void setPoints(int points) {
-		this.points = points;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		return this.itemId == ((Item)obj).getItemId();
-		
 	}
 	
 }

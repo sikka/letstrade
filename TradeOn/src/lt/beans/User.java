@@ -1,9 +1,11 @@
 package lt.beans;
+
+import java.sql.SQLException;
 import java.util.List;
 
 
 public class User {
-	private String uid;
+	private int uid;
 	private String userName;
 	private String emailAddress;
 	private int points;
@@ -11,12 +13,23 @@ public class User {
 	private int avgRating;
 	private List<Rating> reviews;
 	private List<Transaction> transactions;
-	private List<Item> Wishlist;
-	private List<Item> ItemsForTrade;
+	
+	private List<Item> wishList;
+	private List<Item> tradeList;
+	private List<Item> obtainedList;
 
 	private List<Offer> offersMade;
 	private List<Offer> offersReviewed;
 	
+	
+	
+	public List<Item> getObtainedList() {
+		return obtainedList;
+	}
+
+	public void setObtainedList(List<Item> obtainedList) {
+		this.obtainedList = obtainedList;
+	}	
 	
 	public String getUserName() {
 		return userName;
@@ -50,20 +63,20 @@ public class User {
 		this.reviews = reviews;
 	}
 
-	public List<Item> getWishlist() {
-		return Wishlist;
+	public List<Item> getWishList() {
+		return wishList;
 	}
 
-	public void setWishlist(List<Item> wishlist) {
-		Wishlist = wishlist;
+	public void setWishList(List<Item> wishList) {
+		this.wishList = wishList;
 	}
 
-	public List<Item> getItemsForTrade() {
-		return ItemsForTrade;
+	public List<Item> getTradeList() {
+		return tradeList;
 	}
 
-	public void setItemsForTrade(List<Item> itemsForTrade) {
-		ItemsForTrade = itemsForTrade;
+	public void setTradeList(List<Item> tradeList) {
+		this.tradeList = tradeList;
 	}
 
 	public List<Offer> getOffersMade() {
@@ -82,7 +95,7 @@ public class User {
 		this.offersReviewed = offersReviewed;
 	}
 
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
 
@@ -104,5 +117,41 @@ public class User {
 	
 	public void cancelOffer(int offerId){
 		
+	}
+	
+	
+	
+	public void addItemsToUserList(List<Item> items) throws SQLException{
+		for(Item item : items){
+			switch(item.getStatus().getValue()){
+			case 0:
+				wishList.add(item);
+				break;
+			case 1:
+				tradeList.add(item);
+				break;
+			case 2:
+				obtainedList.add(item);
+			}
+			
+		}
+		DBUtil.addItemsToUserList(uid, items);
+	}
+	
+	public void removeItemsFromUserList(List<Item> items) throws SQLException{
+		for(Item item : items){
+			switch(item.getStatus().getValue()){
+			case 0:
+				wishList.remove(item);
+				break;
+			case 1:
+				tradeList.remove(item);
+				break;
+			case 2:
+				obtainedList.remove(item);
+			}
+			
+		}
+		DBUtil.removeItemsFromUserList(uid, items);
 	}
 }

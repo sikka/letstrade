@@ -1,4 +1,3 @@
-package lt.beans;
 import java.util.List;
 
 public class Offer {
@@ -46,8 +45,5 @@ public class Offer {
 		this.status = status;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		return this.offerId == ((Offer)obj).offerId;
-	}
+	
 }
