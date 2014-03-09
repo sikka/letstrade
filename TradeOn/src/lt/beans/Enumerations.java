@@ -12,6 +12,13 @@ public class Enumerations {
 		public int getValue(){
 			return value;
 		}
+		
+		public static ItemType fromValue(int value) {
+	        for (ItemType s : values() ){
+	            if (s.value == value) return s;
+	        }
+	        return null;
+	    }
 	};
 	public static enum OfferStatus{
 		ACCEPTED(0), PENDING(1), CANCELLED(2), INVALID(3);
@@ -24,6 +31,13 @@ public class Enumerations {
 		public int getValue(){
 			return value;
 		}
+		
+		public static OfferStatus fromValue(int value) {
+	        for (OfferStatus s : values() ){
+	            if (s.value == value) return s;
+	        }
+	        return null;
+	    }
 	};
 	public static enum ItemStatus{
 		NEEDS(0), HAVES(1), TRADED(2);
@@ -36,6 +50,13 @@ public class Enumerations {
 		public int getValue(){
 			return value;
 		}
+		
+		public static ItemStatus fromValue(int value) {
+	        for (ItemStatus s : values() ){
+	            if (s.value == value) return s;
+	        }
+	        return null;
+	    }
 	};
 	
 	public static enum OfferItemType{
@@ -49,6 +70,7 @@ public class Enumerations {
 		public int getValue(){
 			return value;
 		}
+		
 	};
 	
 	public static enum OfferItemSide{

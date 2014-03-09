@@ -10,6 +10,8 @@ public class Item {
 	private String description;
 	private int points;
 	private int picId;
+	private List<Offer> offersIncludedIn;
+	private Enumerations.ItemStatus status;
 	
 	public int getPicId() {
 		return picId;
@@ -29,9 +31,6 @@ public class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	private List<Offer> offersIncludedIn;
-	private Enumerations.ItemStatus status;
 	
 	// Getters and Setters
 	public String getTitle() {

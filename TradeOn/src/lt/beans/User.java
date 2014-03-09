@@ -6,8 +6,19 @@ import java.util.List;
 
 public class User {
 	private int uid;
+	private int profileImageId;
+
+	public int getProfileImageId() {
+		return profileImageId;
+	}
+
+	public void setProfileImageId(int profileImageId) {
+		this.profileImageId = profileImageId;
+	}
+
 	private String userName;
 	private String emailAddress;
+
 	private int points;
 	
 	private int avgRating;
@@ -19,7 +30,7 @@ public class User {
 	private List<Item> obtainedList;
 
 	private List<Offer> offersMade;
-	private List<Offer> offersReviewed;
+	private List<Offer> offersReceived;
 	
 	
 	
@@ -87,20 +98,26 @@ public class User {
 		this.offersMade = offersMade;
 	}
 
-	public List<Offer> getOffersReviewed() {
-		return offersReviewed;
+	public List<Offer> getOffersReceived() {
+		return offersReceived;
 	}
 
-	public void setOffersReviewed(List<Offer> offersReviewed) {
-		this.offersReviewed = offersReviewed;
+	public void setOffersReceived(List<Offer> offersReceived) {
+		this.offersReceived = offersReceived;
 	}
 
 	public int getUid() {
 		return uid;
 	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
 
 	public String getEmailAddress() {
 		return emailAddress;
+	}
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 	
@@ -154,4 +171,6 @@ public class User {
 		}
 		DBUtil.removeItemsFromUserList(uid, items);
 	}
+
+
 }

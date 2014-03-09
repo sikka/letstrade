@@ -1,5 +1,6 @@
 package lt.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.*;
+
+import lt.beans.Enumerations.ItemType;
+import lt.beans.Enumerations.*;
 
 public class DBUtil {
 	
@@ -498,6 +502,263 @@ public class DBUtil {
 		    }
 	    }
 	}
-
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static List<User> getAllUsers() {
+		Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<User> users = new ArrayList<User>();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			// DB connection
+			 connect = DriverManager
+			          .getConnection("jdbc:mysql://107.170.251.126:3306/tradeon?user=ltm&password=password");
+			 
+			 // CREATE STATEMENT
+			 statement = connect.createStatement();
+		      // Result set get the result of the SQL query
+		      resultSet = statement
+		          .executeQuery("select * from user");
+		      
+		      while(resultSet.next()){
+		    	  User user = new User();
+		    	  user.setUid(resultSet.getInt("uid"));
+		    	  user.setUserName(resultSet.getString("uname"));
+		    	  user.setEmailAddress(resultSet.getString("email"));
+		    	  user.setPoints(resultSet.getInt("points"));
+		    	  user.setProfileImageId(resultSet.getInt("profile_img_id"));
+		    	  users.add(user);
+		      }
+		      
+		      return users;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			try {
+			  if (resultSet != null) {
+			    resultSet.close();
+			  }
+			
+			  if (statement != null) {
+			    statement.close();
+			  }
+			
+			  if (connect != null) {
+			    connect.close();
+			  }
+			  if (preparedStatement != null){
+				  preparedStatement.close();
+			  }
+			} 
+			catch (Exception e) {
+			    	e.printStackTrace();
+		    }
+	    }
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static List<Item> getAllItems() {
+		Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Item> items = new ArrayList<Item>();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			// DB connection
+			 connect = DriverManager
+			          .getConnection("jdbc:mysql://107.170.251.126:3306/tradeon?user=ltm&password=password");
+			 
+			 // CREATE STATEMENT
+			 statement = connect.createStatement();
+		      // Result set get the result of the SQL query
+		      resultSet = statement
+		          .executeQuery("select * from item");
+		      
+		      while(resultSet.next()){
+		    	  Item item = new Item();
+		    	  item.setItemId(resultSet.getInt("itemId"));
+		    	  item.setTitle(resultSet.getString("title"));
+		    	  item.setType(ItemType.fromValue(resultSet.getInt("product_or_skill")));
+		    	  item.setDescription(resultSet.getString("description"));
+		    	  item.setPoints(resultSet.getInt("points_asked"));
+		    	  item.setUserId(resultSet.getInt("uid"));
+		    	  item.setPicId(resultSet.getInt("picID"));
+		    	  item.setStatus(ItemStatus.fromValue(resultSet.getInt("need_have_traded")));
+		    	  items.add(item);
+		      }
+		      
+		      return items;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			try {
+			  if (resultSet != null) {
+			    resultSet.close();
+			  }
+			
+			  if (statement != null) {
+			    statement.close();
+			  }
+			
+			  if (connect != null) {
+			    connect.close();
+			  }
+			  if (preparedStatement != null){
+				  preparedStatement.close();
+			  }
+			} 
+			catch (Exception e) {
+			    	e.printStackTrace();
+		    }
+	    }
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static List<Offer> getAllOffers() {
+		Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Offer> offers = new ArrayList<Offer>();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			// DB connection
+			 connect = DriverManager
+			          .getConnection("jdbc:mysql://107.170.251.126:3306/tradeon?user=ltm&password=password");
+			 
+			 // CREATE STATEMENT
+			 statement = connect.createStatement();
+		      // Result set get the result of the SQL query
+		      resultSet = statement
+		          .executeQuery("select * from item");
+		      
+		      while(resultSet.next()){
+		    	  Offer offer = new Offer();
+		    	  offer.setOfferId(resultSet.getInt("itemId"));
+		    	  offer.setSenderId(resultSet.getInt("senderId"));
+		    	  offer.setReceiverId(resultSet.getInt("receiverId"));
+		    	  offer.setStatus(OfferStatus.fromValue(resultSet.getInt("offer_status")));
+		    	  offers.add(offer);
+		      }
+		      
+		      return offers;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			try {
+			  if (resultSet != null) {
+			    resultSet.close();
+			  }
+			
+			  if (statement != null) {
+			    statement.close();
+			  }
+			
+			  if (connect != null) {
+			    connect.close();
+			  }
+			  if (preparedStatement != null){
+				  preparedStatement.close();
+			  }
+			} 
+			catch (Exception e) {
+			    	e.printStackTrace();
+		    }
+	    }
+		return null;
+	}
+
+	public static List<ItemsInOffer> getItemsInOffer() {
+		Connection connect = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<ItemsInOffer> itemsInOffers = new ArrayList<ItemsInOffer>();
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			// DB connection
+			 connect = DriverManager
+			          .getConnection("jdbc:mysql://107.170.251.126:3306/tradeon?user=ltm&password=password");
+			 
+			 // CREATE STATEMENT
+			 statement = connect.createStatement();
+		      // Result set get the result of the SQL query
+		      resultSet = statement
+		          .executeQuery("select * from itemsInOffer");
+		      
+		      while(resultSet.next()){
+		    	  ItemsInOffer itemsInOffer = new ItemsInOffer();
+		    	  itemsInOffer.setOfferId(resultSet.getInt("itemId"));
+		    	  itemsInOffer.setItemId(resultSet.getInt("senderId"));
+		    	  itemsInOffer.setPoints(resultSet.getInt("receiverId"));
+		    	  itemsInOffer.setItemType(ItemType.fromValue(resultSet.getInt("item_type")));
+		    	  itemsInOffer.setOfferItemType(resultSet.getString("offer_status").charAt(0));
+		    	  itemsInOffers.add(itemsInOffer);
+		      }
+		      
+		      return itemsInOffers;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			try {
+			  if (resultSet != null) {
+			    resultSet.close();
+			  }
+			
+			  if (statement != null) {
+			    statement.close();
+			  }
+			
+			  if (connect != null) {
+			    connect.close();
+			  }
+			  if (preparedStatement != null){
+				  preparedStatement.close();
+			  }
+			} 
+			catch (Exception e) {
+			    	e.printStackTrace();
+		    }
+	    }
+		return null;
+	}
 }
