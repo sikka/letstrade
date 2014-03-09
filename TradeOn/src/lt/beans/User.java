@@ -7,6 +7,15 @@ import java.util.List;
 public class User {
 	private int uid;
 	private int profileImageId;
+	private String profileImageUri;
+
+	public String getProfileImageUri() {
+		return profileImageUri;
+	}
+
+	public void setProfileImageUri(String profileImageUri) {
+		this.profileImageUri = profileImageUri;
+	}
 
 	public int getProfileImageId() {
 		return profileImageId;

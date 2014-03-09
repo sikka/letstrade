@@ -12,7 +12,14 @@ public class Item {
 	private int picId;
 	private List<Offer> offersIncludedIn;
 	private Enumerations.ItemStatus status;
+	private String picUri;
 	
+	public String getPicUri() {
+		return picUri;
+	}
+	public void setPicUri(String picUri) {
+		this.picUri = picUri;
+	}
 	public int getPicId() {
 		return picId;
 	}

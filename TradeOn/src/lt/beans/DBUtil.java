@@ -534,6 +534,12 @@ public class DBUtil {
 		    	  user.setEmailAddress(resultSet.getString("email"));
 		    	  user.setPoints(resultSet.getInt("points"));
 		    	  user.setProfileImageId(resultSet.getInt("profile_img_id"));
+		    	  ResultSet imgResultSet = statement.executeQuery("Select uri from images where imageId="+resultSet.getInt("profile_img_id"));
+		    	  if(imgResultSet.first()){
+		    		  user.setProfileImageUri(imgResultSet.getString(0));
+		    	  }
+		    	  
+		    	  
 		    	  users.add(user);
 		      }
 		      
@@ -602,6 +608,10 @@ public class DBUtil {
 		    	  item.setUserId(resultSet.getInt("uid"));
 		    	  item.setPicId(resultSet.getInt("picID"));
 		    	  item.setStatus(ItemStatus.fromValue(resultSet.getInt("need_have_traded")));
+		    	  ResultSet imgResultSet = statement.executeQuery("Select uri from images where imageId="+resultSet.getInt("picID"));
+		    	  if(imgResultSet.first()){
+		    		  item.setPicUri(imgResultSet.getString(0));
+		    	  }
 		    	  items.add(item);
 		      }
 		      
